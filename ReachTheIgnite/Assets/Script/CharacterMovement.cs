@@ -12,6 +12,8 @@ public class CharacterMovement : MonoBehaviour
     public bool crouching = false;
     public bool jumping = false;
     private float playerSpeedInternalBool;
+    public bool canMove;
+    public bool running = false;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -19,13 +21,14 @@ public class CharacterMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canMove = true;
         jumpingPower = 5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (crouching || jumping) 
+        if (crouching || jumping || !canMove) 
         {
             playerSpeedInternalBool = 0;
         }
@@ -33,13 +36,25 @@ public class CharacterMovement : MonoBehaviour
         {
             playerSpeedInternalBool = playerSpeed;
         }
+        if (canMove)
+        {
+            Flip();
+            PlayerMovement();
+        }
 
-        Flip();
-        PlayerMovement();
     }
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * playerSpeedInternalBool, rb.velocity.y);
+
+        if (Input.GetKey(KeyCode.A) && playerSpeed !=0|| Input.GetKey(KeyCode.D) && playerSpeed != 0)
+        {
+            running = true;
+        }
+        else
+        {
+            running= false;
+        }
     }
     private void Flip()
     {
@@ -62,7 +77,7 @@ public class CharacterMovement : MonoBehaviour
             horizontal = Input.GetAxisRaw("Horizontal");
 
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&&!jumping )
         {
             crouching = true;
         }

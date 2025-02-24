@@ -16,7 +16,7 @@ public class ClickArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        MiningMiniGameClickEvent();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -37,9 +37,25 @@ public class ClickArea : MonoBehaviour
 
     void MiningMiniGameClickEvent()
     {
-        if (miningMiniGameMovingObjectIsTriggering && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W))
         {
-           
+
+
+            if (miningMiniGameMovingObjectIsTriggering)
+            {
+                miningMiniGame.currentClickedMovingObject = miningMiniGame.currentClickedMovingObject + 1;
+
+                miningMiniGame.SetCurrentScoreToOneOn3CurrentClickedMovingObject();
+            }
+            else
+            {
+                miningMiniGame.currentClickedMovingObject = miningMiniGame.currentClickedMovingObject - 1;
+                if (miningMiniGame.currentClickedMovingObject <= 0)
+                {
+                    miningMiniGame.currentClickedMovingObject = 0;
+                }
+
+            }
         }
     }
 }
