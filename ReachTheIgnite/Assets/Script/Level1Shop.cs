@@ -92,7 +92,7 @@ public class Level1Shop : MonoBehaviour
     IEnumerator youCanJumpHigherNowTextDisappearDelay()
     {
         youCanJumpHigherNowText.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         youCanJumpHigherNowText.SetActive(false);
 
     }

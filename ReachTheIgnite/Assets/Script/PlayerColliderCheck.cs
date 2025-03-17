@@ -13,6 +13,9 @@ public class PlayerColliderCheck : MonoBehaviour
     [SerializeField] private GameObject Level1Shop;
     [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private GameObject ForgotToBuySomethingText;
+    [SerializeField] private GameObject GoStoneClickE;
+    [SerializeField] private GameObject EndScreen;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,9 @@ public class PlayerColliderCheck : MonoBehaviour
             Destroy(other.gameObject);
             level1Shop.fire1Collected = true;
             miningMiniGame.canPlayTheMiniGame = true;
+            StartCoroutine(GoStoneClickEDelay());
+
+
 
         }
         if (other.gameObject.name == "Ignite2")
@@ -62,6 +68,7 @@ public class PlayerColliderCheck : MonoBehaviour
         {
             level1Shop.fire4Collected = true;
             miningMiniGame.canPlayTheMiniGame = true;
+            EndScreen.SetActive(true);
 
 
             Debug.Log("Game Over!");
@@ -113,8 +120,18 @@ public class PlayerColliderCheck : MonoBehaviour
     IEnumerator BuySomethingTextDisappearDelay()
     {
         ForgotToBuySomethingText.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         ForgotToBuySomethingText.SetActive(false);
+
+
+    }
+    IEnumerator GoStoneClickEDelay() 
+    { 
+       GoStoneClickE.SetActive(true);   
+        yield return new WaitForSeconds(3f);
+        GoStoneClickE.SetActive(false);
+
+
 
 
     }

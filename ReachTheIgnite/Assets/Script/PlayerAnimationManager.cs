@@ -17,6 +17,8 @@ public class PlayerAnimationManager : MonoBehaviour
     void Update()
     {
         RunBoolArrangement();
+        UpBoolArrangement();
+        DownBoolArrangement();
     }
 
     void RunBoolArrangement()
@@ -32,12 +34,28 @@ public class PlayerAnimationManager : MonoBehaviour
         }
     }
 
-     void DownBoolArrangement()
+     void UpBoolArrangement()
     {
+        if (characterMovement.jumping)
+        {
+            animator.SetBool("Up", true);
+        }
+        else
+        {
+            animator.SetBool("Up", false);
 
+        }
     }
-    void UpBoolArrangement()
+    void DownBoolArrangement()
     {
+        if (characterMovement.crouching)
+        {
+            animator.SetBool("Down", true);
+        }
+        else
+        {
+            animator.SetBool("Down", false);
 
+        }
     }
 }

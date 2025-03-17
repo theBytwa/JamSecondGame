@@ -5,6 +5,10 @@ using UnityEngine;
 public class MiningMiniGame : MonoBehaviour
 {
     [SerializeField] GameObject MovingObject;
+    [SerializeField] GameObject GoBarrack;
+    [SerializeField] GameObject GoBarrack2;
+    [SerializeField] GameObject GoBarrack3;
+    [SerializeField] GameObject keyWPress;
     [SerializeField] Rigidbody2D MovingObjectRb;
     [SerializeField] Transform Position1;
     [SerializeField] Transform Position2;
@@ -19,11 +23,13 @@ public class MiningMiniGame : MonoBehaviour
     [SerializeField] Level1Shop level1;
 
 
+
    
 
     // Start is called before the first frame update
     void Start()
     {
+        keyWPress.SetActive(true);
         canPlayTheMiniGame = true;
           currentClickedMovingObject =0;
         currentScore = 0;
@@ -45,6 +51,7 @@ public class MiningMiniGame : MonoBehaviour
     }
     public void doAfterActivation()
     {
+        keyWPress.SetActive(true);
         canPlayTheMiniGame = true;
         currentClickedMovingObject = 0;
         currentScore = 0;
@@ -73,10 +80,16 @@ public class MiningMiniGame : MonoBehaviour
                     ignite3Collected = true;
                     level1.Key3Collected = true;
                     level1.Key3CollectedText.SetText("1");
-                    gameObject.SetActive(false);
+                 //   StartCoroutine(GoBarrackDelay3());
+
+                   // gameObject.SetActive(false);
+                    keyWPress.SetActive(false);
+
                     characterMovement.canMove = true;
+                    gameObject.SetActive(false);
+
                 }
-                
+
                 if (ignite1Collected && !ignite2Collected && !ignite3Collected)
                 {
                     canPlayTheMiniGame = false;
@@ -84,9 +97,13 @@ public class MiningMiniGame : MonoBehaviour
                     ignite2Collected = true;
                     level1.Key2Collected = true;
                     level1.Key2CollectedText.SetText("1");
-                    gameObject.SetActive(false);
-                    characterMovement.canMove = true;
+                   // StartCoroutine(GoBarrackDelay2());
 
+                   // gameObject.SetActive(false);
+                    keyWPress.SetActive(false);
+
+                    characterMovement.canMove = true;
+                    gameObject.SetActive(false);
 
 
 
@@ -98,8 +115,14 @@ public class MiningMiniGame : MonoBehaviour
                     ignite1Collected = true;
                     level1.Key1Collected = true;
                     level1.Key1CollectedText.SetText("1");
-                    gameObject.SetActive(false);
+                  //  StartCoroutine(GoBarrackDelay());
+
+                    keyWPress.SetActive(false);
+
                     characterMovement.canMove = true;
+                    gameObject.SetActive(false);
+
+
 
 
 
@@ -109,5 +132,33 @@ public class MiningMiniGame : MonoBehaviour
             }
           
         }
+    }
+
+    IEnumerator GoBarrackDelay()
+    {
+        GoBarrack.SetActive(true);
+
+        yield return new WaitForSeconds(3);
+        GoBarrack.SetActive(false);
+        gameObject.SetActive(false);
+
+    }
+    IEnumerator GoBarrackDelay2()
+    {
+        GoBarrack2.SetActive(true);
+
+        yield return new WaitForSeconds(3);
+        GoBarrack2.SetActive(false);
+        gameObject.SetActive(false);
+
+    }
+    IEnumerator GoBarrackDelay3()
+    {
+        GoBarrack.SetActive(true);
+
+        yield return new WaitForSeconds(3);
+        GoBarrack3.SetActive(false);
+        gameObject.SetActive(false);
+
     }
 }
